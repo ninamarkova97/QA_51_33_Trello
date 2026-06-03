@@ -1,0 +1,40 @@
+package tests;
+
+import dto.Board;
+import dto.User;
+import manager.AppManager;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import pages.BoardsPage;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.MyBoardPage;
+
+import java.util.Random;
+
+import static utils.PropertiesReader.getProperty;
+
+public class DeleteBoardsTests extends AppManager {
+    BoardsPage boardsPage;
+
+    @BeforeMethod
+    public void login() {
+        User user = User.builder()
+                .email(getProperty("base.properties", "email"))
+                .password(getProperty("base.properties", "password"))
+                .build();
+        new HomePage(getDriver()).clickBtnLogin();
+        new LoginPage(getDriver()).login(user);
+        int i = new Random().nextInt(100);
+        Board board = Board.builder().boardTitle("board"+ i).build();
+        boardsPage = new BoardsPage(getDriver());
+        boardsPage.createNewBoard(board);
+        boardsPage.clickBtnCreate();
+    }
+    @Test
+    public void deleteBoardPositiveTest(){
+        new MyBoardPage(getDriver()).deleteBoard();
+    }
+
+
+}

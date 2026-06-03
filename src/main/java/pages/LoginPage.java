@@ -23,12 +23,12 @@ public class LoginPage extends BasePage{
     WebElement btnSubmit;
     @FindBy(id ="sigup-submit")
     WebElement btnSigUp;
-    @FindBy(xpath = "//*[data-testid='form-error--content']")
+    @FindBy(id = "resetPassword")
     WebElement resetPasswordAlert;
-    @FindBy(id = "username-u1d1-error")
-    WebElement errorEmailAlert;
-    @FindBy(id = "password-error")
-    WebElement errorPassword;
+   @FindBy(id = "username-uid1-error")
+   WebElement emailError;
+   @FindBy(id = "password-error")
+   WebElement passwordError;
 
 
     public void login(User user){
@@ -39,13 +39,30 @@ public class LoginPage extends BasePage{
         inputPassword.sendKeys(user.getPassword());
         btnSubmit.click();
     }
-    public void isWrongEmail(User user1){
-        inputEmail.sendKeys(user1.getEmail());
+    public void isWrongEmail(User user){
+        inputEmail.sendKeys(user.getEmail());
         btnContinue.click();
 
     }
     public boolean isBtnSigUpDisplayed(){
-       return btnSigUp.isDisplayed();
+       return  btnSigUp.isDisplayed();
 
+    }
+
+    public void isWrongPassword(User user) {
+        inputEmail.sendKeys(user.getEmail());
+        btnContinue.click();
+        clickWait(inputPassword);
+        inputPassword.sendKeys(user.getPassword());
+        btnSubmit.click();
+    }
+    public boolean resetPasswordAlert(){
+        return resetPasswordAlert.isDisplayed();
+    }
+    public boolean isEmailEmpty(){
+        return emailError.isDisplayed();
+    }
+    public boolean isPasswordEmpty(){
+        return passwordError.isDisplayed();
     }
 }

@@ -12,7 +12,8 @@ import pages.LoginPage;
 import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
-     SoftAssert softAssert =  new SoftAssert();
+    SoftAssert softAssert = new SoftAssert();
+
     @Test
     public void loginPositiveTest() {
         User user = User.builder()
@@ -32,6 +33,7 @@ public class LoginTests extends AppManager {
                 .password(getProperty("base.properties", "password"))
                 .build();
 
+        new HomePage(getDriver()).clickBtnLogin();
         new LoginPage(getDriver()).isWrongEmail(user);
         Assert.assertTrue(new LoginPage(getDriver()).isBtnSigUpDisplayed());
     }
@@ -42,11 +44,31 @@ public class LoginTests extends AppManager {
                 .email(getProperty("base.properties", "email"))
                 .password("Laki2341")
                 .build();
-        LoginPage loginPage = new LoginPage(getDriver());
+        new HomePage(getDriver()).clickBtnLogin();
+        new LoginPage(getDriver()).isWrongPassword(user);
+        Assert.assertTrue(new LoginPage(getDriver()).resetPasswordAlert());
 
-        //softAssert.assertTrue(loginPage.isPsWrong(user));
-      //  softAssert.assertTrue(loginPage.getResetPsAlertTest().contains("Incorrect email and / or password."));
-      //  softAssert.assertAll();
+    }
+    @Test
+    public void loginNegativeEmptyEmailTest() {
+        User user = User.builder()
+                .email("")
+                .password(getProperty("base.properties", "password"))
+                .build();
+
+        new HomePage(getDriver()).clickBtnLogin();
+        new LoginPage(getDriver()).isWrongEmail(user);
+        Assert.assertTrue(new LoginPage(getDriver()).isEmailEmpty());
+    }
+    @Test
+    public void loginNegativeEmptyPasswordTest() {
+        User user = User.builder()
+                .email(getProperty("base.properties", "email"))
+                .password("")
+                .build();
+        new HomePage(getDriver()).clickBtnLogin();
+        new LoginPage(getDriver()).isWrongPassword(user);
+       Assert.assertTrue(new LoginPage(getDriver()).isPasswordEmpty());
 
     }
 }

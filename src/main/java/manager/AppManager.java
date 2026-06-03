@@ -21,12 +21,12 @@ public class AppManager {
         return driver;
     }
 
-    @BeforeMethod
-    public void setup(Method method) {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        logger.info("Start test --> " + method.getName());
-    }
+//    @BeforeMethod
+//    public void setup(Method method) {
+//        driver = new ChromeDriver();
+//        driver.manage().window().maximize();
+//        logger.info("Start test --> " + method.getName());
+//    }
 
     @BeforeMethod
     public void setup() {
