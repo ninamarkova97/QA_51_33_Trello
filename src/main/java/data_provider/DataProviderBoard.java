@@ -28,7 +28,8 @@ public class DataProviderBoard {
     @DataProvider
     public Iterator<Board> newBoardDPFromFile(){
         List<Board> listBoards = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("src/test/resources/boards.csv"))){
+        try (BufferedReader bufferedReader = new BufferedReader
+                (new FileReader("src/test/resources/boards.csv"))){
         String line = bufferedReader.readLine();
         while (line != null){
             listBoards.add(Board.builder().boardTitle(line).build());

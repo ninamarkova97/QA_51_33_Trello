@@ -18,6 +18,12 @@ public class MyBoardPage extends BasePage {
     WebElement btnDots;
     @FindBy(xpath = "//div[text()='Close board']")
     WebElement btnCloseBoard;
+    @FindBy(xpath = "//button[@data-testid='popover-close-board-confirm']")
+    WebElement btnClose;
+    @FindBy(xpath = "//button[@data-testid='close-board-delete-board-button']")
+    WebElement btnDeleteBoard;
+    @FindBy(xpath = "//button[@data-testid='close-board-delete-board-confirm-button']")
+    WebElement btnDelete;
 
     public boolean validateBoardName(String text) {
         return isTextInElementPresent(nameBoard, text);
@@ -26,6 +32,11 @@ public class MyBoardPage extends BasePage {
     public void deleteBoard() {
         clickWait(btnDots);
         clickWait(btnCloseBoard);
+        clickWait(btnClose);
+        driver.navigate().refresh();
+        clickWait(btnDots);
+        clickWait(btnDeleteBoard);
+        clickWait(btnDelete);
 
     }
 }

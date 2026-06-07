@@ -1,5 +1,6 @@
 package pages;
 
+import manager.AppManager;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import java.time.Duration;
 
 public abstract class BasePage {
     static WebDriver driver;
-    Logger logger = LoggerFactory.getLogger(BasePage.class);
+    Logger logger = LoggerFactory.getLogger(AppManager.class);
 
     public static void setDriver(WebDriver wd) {
         driver = wd;
@@ -33,8 +34,8 @@ public abstract class BasePage {
                     .until(ExpectedConditions
                             .elementToBeClickable(element)).click();
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("created exception");
+//            e.printStackTrace();
+//            System.out.println("created exception");
             logger.error("created exception", e);
         }
     }

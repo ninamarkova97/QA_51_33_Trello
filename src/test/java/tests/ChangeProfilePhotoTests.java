@@ -3,19 +3,20 @@ package tests;
 import dto.Board;
 import dto.User;
 import manager.AppManager;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.AtlassianPage;
 import pages.BoardsPage;
 import pages.HomePage;
 import pages.LoginPage;
-import pages.MyBoardPage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static utils.PropertiesReader.getProperty;
 
-public class DeleteBoardsTests extends AppManager {
+public class ChangeProfilePhotoTests extends AppManager {
     BoardsPage boardsPage;
 
     @BeforeMethod
@@ -26,17 +27,16 @@ public class DeleteBoardsTests extends AppManager {
                 .build();
         new HomePage(getDriver()).clickBtnLogin();
         new LoginPage(getDriver()).login(user);
-        int i = new Random().nextInt(100);
-        Board board = Board.builder().boardTitle("board"+ i).build();
         boardsPage = new BoardsPage(getDriver());
-        boardsPage.createNewBoard(board);
-        boardsPage.clickBtnCreate();
+
     }
     @Test
-    public void deleteBoardPositiveTest(){
-        new MyBoardPage(getDriver()).deleteBoard();
-        Assert.assertTrue(boardsPage.validateMessageBoardDelete("Board deleted."));
+    public void changeProfilePhotoPositiveTest(){
+        boardsPage.openMyAccount();
+        List<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
+        System.out.println(tabs);
+        getDriver().switchTo().window(tabs.get(1));
+        AtlassianPage atlassianPage = new AtlassianPage(getDriver());
+        atlassianPage.changePhotoInMyAvatar();
     }
-
-
 }
