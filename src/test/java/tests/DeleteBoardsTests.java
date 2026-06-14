@@ -18,7 +18,7 @@ import static utils.PropertiesReader.getProperty;
 public class DeleteBoardsTests extends AppManager {
     BoardsPage boardsPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() {
         User user = User.builder()
                 .email(getProperty("base.properties", "email"))
@@ -32,7 +32,7 @@ public class DeleteBoardsTests extends AppManager {
         boardsPage.createNewBoard(board);
         boardsPage.clickBtnCreate();
     }
-    @Test
+    @Test(groups = "smoke")
     public void deleteBoardPositiveTest(){
         new MyBoardPage(getDriver()).deleteBoard();
         Assert.assertTrue(boardsPage.validateMessageBoardDelete("Board deleted."));

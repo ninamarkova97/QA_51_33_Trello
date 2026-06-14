@@ -13,10 +13,10 @@ dependencies {
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.16.1'
     implementation group: 'org.testng', name: 'testng', version: '7.5.1'
 
-    compileOnly 'org.projectlombok:lombok:1.18.28'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
-    testCompileOnly 'org.projectlombok:lombok:1.18.28'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
+    compileOnly 'org.projectlombok:lombok:1.18.42'
+    annotationProcessor 'org.projectlombok:lombok:1.18.42'
+    testCompileOnly 'org.projectlombok:lombok:1.18.42'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.42'
 
     implementation 'ch.qos.logback:logback-classic:1.5.8'
 
@@ -24,4 +24,14 @@ dependencies {
 
 test {
     useTestNG()
+
+}
+
+
+
+tasks.register('smoke_tests', Test) {
+    useTestNG() {
+        suites 'src/test/resources/smoke_tests.xml'
+    }
+
 }

@@ -3,12 +3,16 @@ package manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.openqa.selenium.chrome.ChromeOptions;
+import utils.WDListener;
 
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.Method;
@@ -28,7 +32,7 @@ public class AppManager {
 //        logger.info("Start test --> " + method.getName());
 //    }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
 
         Map<String, Object> prefs = new HashMap<>();
@@ -40,9 +44,12 @@ public class AppManager {
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
+
+        WebDriverListener webDriverListener = new WDListener();
+        driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
     }
 
-    @AfterMethod(enabled = false)
+    @AfterMethod(alwaysRun = true)
     public void tearDown(Method method) {
         if (driver != null)
             driver.quit();

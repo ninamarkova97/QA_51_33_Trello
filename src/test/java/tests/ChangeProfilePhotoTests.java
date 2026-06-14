@@ -21,7 +21,7 @@ import static utils.PropertiesReader.getProperty;
 public class ChangeProfilePhotoTests extends AppManager {
     BoardsPage boardsPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void login() {
         User user = User.builder()
                 .email(getProperty("base.properties", "email"))
@@ -32,7 +32,7 @@ public class ChangeProfilePhotoTests extends AppManager {
         boardsPage = new BoardsPage(getDriver());
 
     }
-    @Test (retryAnalyzer = RetryAnalyzer.class)
+    @Test (retryAnalyzer = RetryAnalyzer.class, groups = "smoke")
     public void changeProfilePhotoPositiveTest(){
         boardsPage.openMyAccount();
         List<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
