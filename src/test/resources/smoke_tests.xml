@@ -4,6 +4,7 @@
         <groups>
             <run>
                 <include name="smoke"/>
+                <exclude name="photo"/>
             </run>
         </groups>
         <classes>

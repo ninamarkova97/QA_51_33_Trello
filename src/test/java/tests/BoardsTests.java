@@ -27,7 +27,7 @@ public class BoardsTests extends AppManager {
         new LoginPage(getDriver()).login(user);
     }
 
-    @Test(groups = "smoke")
+    @Test(groups = {"smoke","positive","board"})
     public void createNewBoardPositiveTest() {
         Board board = Board.builder()
                 .boardTitle("qwerty")
@@ -55,7 +55,7 @@ public class BoardsTests extends AppManager {
                 .validateBoardName(board.getBoardTitle()));
     }
 
-    @Test
+    @Test(groups = {"smoke","negative","board"})
     public void createNewBoardNegativeTest_EmptyBoardTitle() {
         Board board = Board.builder()
                 .boardTitle("")

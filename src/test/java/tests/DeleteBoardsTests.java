@@ -32,7 +32,7 @@ public class DeleteBoardsTests extends AppManager {
         boardsPage.createNewBoard(board);
         boardsPage.clickBtnCreate();
     }
-    @Test(groups = "smoke")
+    @Test(groups = {"smoke","board"})
     public void deleteBoardPositiveTest(){
         new MyBoardPage(getDriver()).deleteBoard();
         Assert.assertTrue(boardsPage.validateMessageBoardDelete("Board deleted."));

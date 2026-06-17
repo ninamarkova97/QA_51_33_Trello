@@ -32,7 +32,7 @@ public class ChangeProfilePhotoTests extends AppManager {
         boardsPage = new BoardsPage(getDriver());
 
     }
-    @Test (retryAnalyzer = RetryAnalyzer.class, groups = "smoke")
+    @Test (retryAnalyzer = RetryAnalyzer.class, groups = {"smoke","photo"})
     public void changeProfilePhotoPositiveTest(){
         boardsPage.openMyAccount();
         List<String> tabs = new ArrayList<>(getDriver().getWindowHandles());
