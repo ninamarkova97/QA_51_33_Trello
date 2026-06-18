@@ -9,12 +9,13 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import java.io.File;
 
-public class AtlassianPage extends BasePage{
+public class AtlassianPage extends BasePage {
     public AtlassianPage(WebDriver driver) {
         PageFactory.initElements(new AjaxElementLocatorFactory
                 (driver, 10), this);
     }
-    @FindBy(xpath = "//button=[@data-testid='profile-avatar-dropdown-trigger']")
+
+    @FindBy(xpath = "//button[@data-testid='profile-avatar-dropdown-trigger']")
     WebElement btnAvatar;
     @FindBy(xpath = "//div[@data-test-selector='profile-hover-info']")
     WebElement divProfilePhoto;
@@ -29,23 +30,20 @@ public class AtlassianPage extends BasePage{
     @FindBy(xpath = "//span[text()='Upload a photo or select from some default options']")
     WebElement messageWrong;
 
-    public void changePhotoInMyAvatar(String fileName){
-       // clickWait(btnAvatar);
+    public void changePhotoInMyAvatar(String fileName) {
         Actions actions = new Actions(driver);
         actions.moveToElement(divProfilePhoto).pause(1000).click().perform();
         clickWait(btnChangeProfilePhoto);
         File photo = new File(fileName);
         inputUploadPhoto.sendKeys(photo.getAbsolutePath());
         clickWait(btnUpload);
-
-
     }
 
     public boolean validateMessage(String text){
-        return isTextInElementPresent(messageAvatarWasAdded,text);
-
+        return isTextInElementPresent(messageAvatarWasAdded, text);
     }
+
     public boolean validateWrongMessage(String text){
-        return isTextInElementPresent(messageWrong,text);
+        return isTextInElementPresent(messageWrong, text);
     }
 }

@@ -39,7 +39,7 @@ public class ChangeProfilePhotoTests extends AppManager {
         System.out.println(tabs);
         getDriver().switchTo().window(tabs.get(1));
         AtlassianPage atlassianPage = new AtlassianPage(getDriver());
-        atlassianPage.changePhotoInMyAvatar("src/main/resources/cat1.jpg");
+        atlassianPage.changePhotoInMyAvatar("src/main/resources/funny-cat-3d-illustration.jpg");
 
         Assert.assertTrue(atlassianPage.validateMessage("Avatar added"));
     }
